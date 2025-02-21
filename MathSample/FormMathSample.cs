@@ -1,4 +1,5 @@
-﻿using SampleCommon;
+﻿using NodeEditor;
+using SampleCommon;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace MathSample
     {
         //Context that will be used for our nodes
         MathContext context = new MathContext();
+        NodesControlModel model = new NodesControlModel();
 
         public FormMathSample()
         {
@@ -24,11 +26,15 @@ namespace MathSample
         private void FormMathSample_Load(object sender, EventArgs e)
         {
             //Context assignment
-            controlNodeEditor.nodesControl.Context = context;
-            controlNodeEditor.nodesControl.OnNodeContextSelected += NodesControlOnOnNodeContextSelected; 
-            
+            model.Context = context;
+            controlNodeEditor.nodesControl.OnNodeContextSelected += NodesControlOnOnNodeContextSelected;
+
             //Loading sample from file
-            controlNodeEditor.nodesControl.Deserialize(File.ReadAllBytes("default.nds"));
+            model.Clear();
+            controlNodeEditor.nodesControl.Clear();
+            model.Deserialize(File.ReadAllBytes("1.nds"));
+
+            controlNodeEditor.nodesControl.model = model;
         }
 
         private void NodesControlOnOnNodeContextSelected(object o)
@@ -44,8 +50,10 @@ namespace MathSample
             ofd.Filter = "nds files|*.nds";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                model.Clear();
                 controlNodeEditor.nodesControl.Clear();
-                controlNodeEditor.nodesControl.Deserialize(File.ReadAllBytes(ofd.FileName));
+                model.Deserialize(File.ReadAllBytes(ofd.FileName));
+                controlNodeEditor.nodesControl.model = model;
             }
         }
 
@@ -57,7 +65,7 @@ namespace MathSample
             ofd.Filter = "nds files|*.nds";
             if (ofd.ShowDialog() == DialogResult.OK)
             {               
-                byte[] t1 = controlNodeEditor.nodesControl.Serialize();
+                byte[] t1 = model.Serialize();
                 File.WriteAllBytes(ofd.FileName, t1);                
             }
 
@@ -65,6 +73,7 @@ namespace MathSample
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            model.Clear();
             controlNodeEditor.nodesControl.Clear();
         }
     }

@@ -10,7 +10,7 @@
     <RootNamespace>MathSample</RootNamespace>
     <AssemblyName>MathSample</AssemblyName>
     <LangVersion>8.0</LangVersion>
-    <Nullable>enable</Nullable>	
+    <Nullable>enable</Nullable>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -67,6 +67,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="1.nds">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="111.nds">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="2.nds">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="default.nds">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

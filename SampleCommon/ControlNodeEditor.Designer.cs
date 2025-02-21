@@ -75,7 +75,7 @@
             // nodesControl
             // 
             this.nodesControl.BackgroundImage = global::SampleCommon.Properties.Resources.grid;
-            this.nodesControl.Context = null;
+            this.nodesControl.model.Context = null;
             this.nodesControl.Location = new System.Drawing.Point(0, 0);
             this.nodesControl.Name = "nodesControl";
             this.nodesControl.Size = new System.Drawing.Size(5000, 5000);
