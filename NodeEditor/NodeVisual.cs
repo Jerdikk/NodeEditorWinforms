@@ -127,7 +127,7 @@ namespace NodeEditor
                 curInputH += SocketVisual.SocketHeight + ComponentPadding;
             }
 
-            foreach (var input in GetInputs())
+            foreach (var input in GetInputs(false))
             {
                 var socket = new SocketVisual();
                 socket.Type = input.ParameterType;
@@ -178,7 +178,11 @@ namespace NodeEditor
             {                
                 dynamic context = new DynamicNodeContext();
 
-                foreach (var input in GetInputs())
+          /*      NodeAttribute t1 = Type.GetCustomAttributes(typeof(NodeAttribute), false)
+                                       .Cast<NodeAttribute>()
+                                       .FirstOrDefault();*/
+
+                foreach (var input in GetInputs(true))
                 {
                     var contextName = input.Name.Replace(" ", "");
                     if (input.ParameterType.FullName.Replace("&", "") == stringTypeName)
@@ -224,8 +228,16 @@ namespace NodeEditor
             return nodeContext;
         }
 
-        internal ParameterInfo[] GetInputs()
+        internal ParameterInfo[] GetInputs(bool isIs)
         {
+            NodeAttribute t1 = Type.GetCustomAttributes(typeof(NodeAttribute), false)
+                                        .Cast<NodeAttribute>()
+                                        .FirstOrDefault();
+            if ((t1 != null)&&(!isIs))
+                if (t1.IsOnlyOut) 
+                {
+                    return new ParameterInfo[0];
+                }
             return Type.GetParameters().Where(x => !x.IsOut).ToArray();
         }
 
@@ -246,7 +258,7 @@ namespace NodeEditor
                     CustomEditor.ClientSize.Height + HeaderHeight + 8);                
             }
 
-            var inputs = GetInputs().Length;
+            var inputs = GetInputs(false).Length;
             var outputs = GetOutputs().Length;
             if (Callable)
             {
@@ -350,8 +362,8 @@ namespace NodeEditor
             {
                 dc[parameter] = parametersDict[parameter];
                 var o = outs.FirstOrDefault(x => x.Name == parameter);
-                //if (o != null)
-                Debug.Assert(o != null, "Output not found");
+                if (o != null)
+                //Debug.Assert(o != null, "Output not found");
                 {
                     o.Value = dc[parameter];
                 }                                

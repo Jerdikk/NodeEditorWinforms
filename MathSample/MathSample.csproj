@@ -9,6 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MathSample</RootNamespace>
     <AssemblyName>MathSample</AssemblyName>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>	
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

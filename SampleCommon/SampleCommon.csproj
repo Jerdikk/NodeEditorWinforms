@@ -10,6 +10,8 @@
     <RootNamespace>SampleCommon</RootNamespace>
     <AssemblyName>SampleCommon</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+	<LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SampleCommon;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,6 +34,38 @@ namespace MathSample
         private void NodesControlOnOnNodeContextSelected(object o)
         {
             controlNodeEditor.propertyGrid.SelectedObject = o;
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = "nds";
+            ofd.AddExtension = true;
+            ofd.Filter = "nds files|*.nds";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                controlNodeEditor.nodesControl.Clear();
+                controlNodeEditor.nodesControl.Deserialize(File.ReadAllBytes(ofd.FileName));
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog ofd = new SaveFileDialog();
+            ofd.DefaultExt = "nds";
+            ofd.AddExtension = true;
+            ofd.Filter = "nds files|*.nds";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {               
+                byte[] t1 = controlNodeEditor.nodesControl.Serialize();
+                File.WriteAllBytes(ofd.FileName, t1);                
+            }
+
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            controlNodeEditor.nodesControl.Clear();
         }
     }
 }

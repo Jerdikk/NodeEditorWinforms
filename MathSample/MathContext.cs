@@ -19,6 +19,11 @@ namespace MathSample
         {
             outValue = inValue;
         }
+        [Node("ЗначВыход", "Выход", "Basic", "Allows to output a simple value.", false, IsOnlyOut = true)]
+        public void OutputValue(float inValue, out float outValue)
+        {
+            outValue = inValue;
+        }
 
         [Node("Add","Operators","Basic","Adds two input values.",false)]
         public void Add(float a, float b, out float result)

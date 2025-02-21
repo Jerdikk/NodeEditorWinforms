@@ -49,6 +49,8 @@ namespace NodeEditor
         /// </summary>
         public bool IsCallable { get; set; }
 
+        public bool IsOnlyOut { get; set; }
+
         /// <summary>
         /// Name of the node that will be displayed in the node caption.
         /// </summary>
@@ -98,7 +100,7 @@ namespace NodeEditor
         /// <param name="width">Width of single node, or Auto if not determined</param>
         /// <param name="height">Height of single node, or Auto if not determined</param>
         public NodeAttribute(string name = "Node", string menu = "", string category = "General",
-            string description = "Some node.", bool isCallable = true, bool isExecutionInitiator = false, Type customEditor = null, string xmlExportName = "",
+            string description = "Some node.", bool isCallable = true, bool isExecutionInitiator = false, bool isOnlyOut=false, Type customEditor = null, string xmlExportName = "",
             int width = Auto, int height = Auto)
         {
             Name = name;
@@ -107,6 +109,7 @@ namespace NodeEditor
             Description = description;
             IsCallable = isCallable;
             IsExecutionInitiator = isExecutionInitiator;
+            IsOnlyOut = isOnlyOut;
             CustomEditor = customEditor;
             XmlExportName = xmlExportName;
             Width = width;
