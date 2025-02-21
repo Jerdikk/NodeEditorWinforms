@@ -29,6 +29,11 @@ using System.Windows.Forms;
 
 namespace NodeEditor
 {
+    public class NodeVisualModel
+    {
+
+        public NodeVisualModel() { }
+    }
     /// <summary>
     /// Class that represents one instance of node.
     /// </summary>
