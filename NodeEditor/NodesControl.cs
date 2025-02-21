@@ -497,7 +497,7 @@ namespace NodeEditor
         /// </summary>
         public void Clear()
         {
-            model.Clear();
+            //model.Clear();
             Controls.Clear();
             Refresh();
         }

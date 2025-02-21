@@ -76,5 +76,17 @@ namespace MathSample
             model.Clear();
             controlNodeEditor.nodesControl.Clear();
         }
+
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            model.Clear();
+            
+            model.Deserialize(File.ReadAllBytes("2.nds"));
+            model.Execute();
+            model.Deserialize(File.ReadAllBytes("1.nds"));
+            model.Execute();
+            controlNodeEditor.nodesControl.Clear();
+            controlNodeEditor.nodesControl.model = model;
+        }
     }
 }
