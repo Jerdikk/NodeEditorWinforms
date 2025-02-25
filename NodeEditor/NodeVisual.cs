@@ -115,31 +115,48 @@ namespace NodeEditor
                         Input = true
                     });
                 }
-                socketList.Add(new SocketVisual()
-                {
-                    Height = SocketVisual.SocketHeight,
-                    Name = "Exit",
-                    IsMainExecution = true,
-                    Type = typeof (ExecutionPath),
-                    Width = SocketVisual.SocketHeight,
-                    X = X + NodeWidth - SocketVisual.SocketHeight,
-                    Y = Y + curOutputH
-                });
-                curOutputH += SocketVisual.SocketHeight + ComponentPadding;
-                curInputH += SocketVisual.SocketHeight + ComponentPadding;
+            
 
                 if (OutExecPin > 1)
                 {
                     socketList.Add(new SocketVisual()
                     {
                         Height = SocketVisual.SocketHeight,
-                        Name = "Exit1",
+                        Name = "True",
+                        IsMainExecution = true,
+                        Type = typeof(ExecutionPath),
+                        Width = SocketVisual.SocketHeight,
+                        X = X + NodeWidth - SocketVisual.SocketHeight,
+                        Y = Y + curOutputH
+                    });
+                    curOutputH += SocketVisual.SocketHeight + ComponentPadding;
+                    curInputH += SocketVisual.SocketHeight + ComponentPadding;
+
+                    socketList.Add(new SocketVisual()
+                    {
+                        Height = SocketVisual.SocketHeight,
+                        Name = "False",
                         IsMainExecution = false,
                         Type = typeof(ExecutionPath),
                         Width = SocketVisual.SocketHeight,
                         X = X + NodeWidth - SocketVisual.SocketHeight,
                         Y = Y + curOutputH
                     });
+                }
+                else
+                {
+                    socketList.Add(new SocketVisual()
+                    {
+                        Height = SocketVisual.SocketHeight,
+                        Name = "Exit",
+                        IsMainExecution = true,
+                        Type = typeof(ExecutionPath),
+                        Width = SocketVisual.SocketHeight,
+                        X = X + NodeWidth - SocketVisual.SocketHeight,
+                        Y = Y + curOutputH
+                    });
+                    curOutputH += SocketVisual.SocketHeight + ComponentPadding;
+                    curInputH += SocketVisual.SocketHeight + ComponentPadding;
                 }
 
             }

@@ -85,10 +85,7 @@ namespace NodeEditor
                     Resolve(init);
                     init.Execute(Context);
 
-                    if (init.OutExecPin>1)
-                    {
-                        int yy = 1;
-                    }
+
 
                     NodeConnection connection = null;
 
@@ -126,7 +123,7 @@ namespace NodeEditor
                         }
                     }*/
                     // эта штука никогда не сработает, нужно понять что такое сигнал...
-                    connection = graph.Connections.FirstOrDefault( x => x.OutputNode == init && x.IsExecution && x.OutputSocket.Value != null && (x.OutputSocket.Value as ExecutionPath).IsSignaled);
+                    connection = graph.Connections.FirstOrDefault(x => x.OutputNode == init && x.IsExecution && x.OutputSocket.Value != null && (x.OutputSocket.Value as ExecutionPath).IsSignaled);
 
                     if (connection == null)
                     {
@@ -140,6 +137,22 @@ namespace NodeEditor
                     {
                         connection.InputNode.IsBackExecuted = false;
                         //Execute(connection.InputNode);
+
+                        if (init.Name.Equals("Bool node"))
+                        {                            
+                            foreach (SocketVisual t3 in init.GetSockets())
+                            {
+                                if ((t3 != null) && (t3.Name.Equals("condition")))
+                                {
+                                    bool t44 = (bool)t3.Value;
+                                    if (!t44)
+                                    {
+                                        connection = graph.Connections.FirstOrDefault(x => x.OutputNode == init && x.IsExecution && !x.OutputSocket.IsMainExecution);
+                                    }
+                                }
+                            }                            
+                        }
+                        
                         nodeQueue.Enqueue(connection.InputNode);
                     }
                     else

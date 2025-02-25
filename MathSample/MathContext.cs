@@ -98,6 +98,14 @@ namespace MathSample
             result = (ushort)(a % b);
         }
 
+        [Node(">", "Operators", "Basic", "Divides two input values.", IsCallable = false)]
+        public void More(ushort a, ushort b, out bool result)
+        {
+
+            result = a > b;
+        }
+
+
         [Node("Show Value","Helper","Basic","Shows input value in the message box.")]
         public void ShowMessageBox(ushort x)
         {
@@ -105,12 +113,20 @@ namespace MathSample
             MessageBox.Show(x.ToString(), "Show Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        [Node("Run node", "Helper", "Basic", "Runs one step.",OutExec =2)]
+        [Node("Run node", "Helper", "Basic", "Runs one step.")]
         public void RunNode(ushort Acc, ushort PrC)
         {
             GlobalData.Instance.globalContext.Accumulator = (byte)Acc;           
             GlobalData.Instance.globalContext.ProgrammCounter = (byte)PrC;
         }
+
+        [Node("Bool node", "Helper", "Basic", "Runs one step.", OutExec = 2)]
+        public void BoolNode(bool condition)
+        {
+            
+        }
+
+
 
         [Node("Starter","Helper","Basic","Starts execution",true,true)]
         public void Starter()
