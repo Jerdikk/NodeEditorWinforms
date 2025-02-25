@@ -104,7 +104,26 @@ namespace MathSample
 
             result = a > b;
         }
+        [Node("<", "Operators", "Basic", "Divides two input values.", IsCallable = false)]
+        public void Less(ushort a, ushort b, out bool result)
+        {
 
+            result = a < b;
+        }
+
+        [Node("==", "Operators", "Basic", "Divides two input values.", IsCallable = false)]
+        public void Eequal(ushort a, ushort b, out bool result)
+        {
+
+            result = a == b;
+        }
+
+        [Node("Not", "Operators", "Basic", "Divides two input values.", IsCallable = false)]
+        public void Enot(bool a, out bool result)
+        {
+
+            result = !a;
+        }
 
         [Node("Show Value","Helper","Basic","Shows input value in the message box.")]
         public void ShowMessageBox(ushort x)
