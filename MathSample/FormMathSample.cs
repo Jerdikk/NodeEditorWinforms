@@ -32,7 +32,7 @@ namespace MathSample
             //Loading sample from file
             model.Clear();
             controlNodeEditor.nodesControl.Clear();
-            model.Deserialize(File.ReadAllBytes("1.nds"));
+          //  model.Deserialize(File.ReadAllBytes("0.nds"));
 
             controlNodeEditor.nodesControl.model = model;
         }
@@ -64,9 +64,19 @@ namespace MathSample
             ofd.AddExtension = true;
             ofd.Filter = "nds files|*.nds";
             if (ofd.ShowDialog() == DialogResult.OK)
-            {               
-                byte[] t1 = model.Serialize();
-                File.WriteAllBytes(ofd.FileName, t1);                
+            {
+                try
+                {
+                    byte[] t1 = model.Serialize();
+                    if ((t1 != null) && (t1.Length > 0))
+                    {
+                        File.WriteAllBytes(ofd.FileName, t1);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
             }
 
         }
@@ -81,9 +91,9 @@ namespace MathSample
         {
             model.Clear();
             
-            model.Deserialize(File.ReadAllBytes("2.nds"));
+            model.Deserialize(File.ReadAllBytes("0.nds"));
             model.Execute();
-            model.Deserialize(File.ReadAllBytes("1.nds"));
+            model.Deserialize(File.ReadAllBytes("0.nds"));
             model.Execute();
             controlNodeEditor.nodesControl.Clear();
             controlNodeEditor.nodesControl.model = model;

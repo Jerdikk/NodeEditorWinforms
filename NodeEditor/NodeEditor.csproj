@@ -11,7 +11,7 @@
     <AssemblyName>NodeEditor</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <LangVersion>8.0</LangVersion>
-    <Nullable>enable</Nullable>	
+    <Nullable>enable</Nullable>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -51,11 +51,15 @@
     <Compile Include="INodesContext.cs" />
     <Compile Include="NodeAttribute.cs" />
     <Compile Include="NodeConnection.cs" />
-    <Compile Include="NodesControl.cs" />
+    <Compile Include="NodesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="NodesControl.Designer.cs">
       <DependentUpon>NodesControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="NodesControlModel.cs" />
     <Compile Include="NodesGraph.cs" />
+    <Compile Include="NodeToken.cs" />
     <Compile Include="NodeVisual.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">

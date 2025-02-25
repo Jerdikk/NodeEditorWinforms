@@ -51,6 +51,7 @@ namespace NodeEditor
 
         public bool IsOnlyOut { get; set; }
 
+        public int OutExec { get; set; }
         /// <summary>
         /// Name of the node that will be displayed in the node caption.
         /// </summary>
@@ -101,7 +102,7 @@ namespace NodeEditor
         /// <param name="height">Height of single node, or Auto if not determined</param>
         public NodeAttribute(string name = "Node", string menu = "", string category = "General",
             string description = "Some node.", bool isCallable = true, bool isExecutionInitiator = false, bool isOnlyOut=false, Type customEditor = null, string xmlExportName = "",
-            int width = Auto, int height = Auto)
+            int width = Auto, int height = Auto, int outExec=1)
         {
             Name = name;
             Menu = menu;
@@ -110,6 +111,7 @@ namespace NodeEditor
             IsCallable = isCallable;
             IsExecutionInitiator = isExecutionInitiator;
             IsOnlyOut = isOnlyOut;
+            OutExec = outExec;
             CustomEditor = customEditor;
             XmlExportName = xmlExportName;
             Width = width;

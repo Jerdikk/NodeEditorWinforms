@@ -55,6 +55,8 @@ namespace NodeEditor
         internal MethodInfo Type { get; set; }
         internal int Order { get; set; }
         internal bool Callable { get; set; }
+        internal bool IsOnlyOut { get; set; }
+        internal int OutExecPin { get; set; }
         internal bool ExecInit { get; set; }
         internal bool IsSelected { get; set; }
         internal FeedbackType Feedback { get; set; }
@@ -125,6 +127,21 @@ namespace NodeEditor
                 });
                 curOutputH += SocketVisual.SocketHeight + ComponentPadding;
                 curInputH += SocketVisual.SocketHeight + ComponentPadding;
+
+                if (OutExecPin > 1)
+                {
+                    socketList.Add(new SocketVisual()
+                    {
+                        Height = SocketVisual.SocketHeight,
+                        Name = "Exit1",
+                        IsMainExecution = false,
+                        Type = typeof(ExecutionPath),
+                        Width = SocketVisual.SocketHeight,
+                        X = X + NodeWidth - SocketVisual.SocketHeight,
+                        Y = Y + curOutputH
+                    });
+                }
+
             }
 
             foreach (var input in GetInputs(false))
@@ -338,7 +355,10 @@ namespace NodeEditor
                 socet.Draw(g, mouseLocation, mouseButtons);
             }
         }
-
+        /// <summary>
+        ///  непосредственно запуск метода
+        /// </summary>
+        /// <param name="context"></param>
         internal void Execute(INodesContext context)
         {
             context.CurrentProcessingNode = this;

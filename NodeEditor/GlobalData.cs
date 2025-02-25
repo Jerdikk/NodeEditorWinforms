@@ -12,24 +12,30 @@ namespace SampleCommon
     [Serializable]
     public class GlobalContext
     {
-        public byte AH;
-        public byte AL;
+        /* public byte AH;
+         public byte AL;
 
-        public ushort AX
-        {
-            get
-            {
-                return (ushort)(AH * 256 + AL);
-            }
-            set
-            {
-                AL = (byte)(value & 0xF);
-                AH = (byte)(value >> 8);
-            }
-        }
+         public ushort AX
+         {
+             get
+             {
+                 return (ushort)(AH * 256 + AL);
+             }
+             set
+             {
+                 AL = (byte)(value & 0xF);
+                 AH = (byte)(value >> 8);
+             }
+         }*/
+        // # accumulator
+        public byte Accumulator;
+        // # program counter
+        public byte ProgrammCounter;
+        // # carry flag
+        public byte CarryFlag;
 
-        public byte CodePointer;
-        public byte MemoryPointer;
+        //public byte CodePointer;
+        //public byte MemoryPointer;
 
         public byte[] Memory = new byte[256];
         public byte[] Code = new byte[256];
@@ -41,9 +47,9 @@ namespace SampleCommon
             Memory = new byte[256];
             Code = new byte[256];
             Instruction = "";
-            CodePointer = 0;
-            MemoryPointer = 0;
-            AX = 0;
+           // CodePointer = 0;
+          //  MemoryPointer = 0;
+           // AX = 0;
         }
 
         public void Reset()
@@ -51,9 +57,9 @@ namespace SampleCommon
             Memory = new byte[256];
             Code = new byte[256];
             Instruction = "";
-            CodePointer = 0;
-            MemoryPointer = 0;
-            AX = 0;
+            Accumulator = 0;
+            ProgrammCounter = 0;
+          //  AX = 0;
         }
     }
     public sealed class GlobalData
