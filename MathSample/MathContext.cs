@@ -15,19 +15,24 @@ namespace MathSample
         public NodeVisual CurrentProcessingNode { get; set; }
         public event Action<string, NodeVisual, FeedbackType, object, bool> FeedbackInfo;
 
-        [Node("Value", "Input", "Basic", "Allows to output a simple value.", IsCallable = false)]
+        [Node("Value", "Вход", "Basic", "Allows to output a simple value.", IsCallable = false)]
         public void InputValue(ushort inValue, out ushort outValue)
         {
             outValue = inValue;
         }
 
-        [Node("РегистрAккВход", "Input", "Basic", "Allows to in to Accumulator.", IsCallable = false)]
+        [Node("РегистрAккВход", "Вход", "Basic", "Allows to in to Accumulator.", IsCallable = false)]
         public void AccumulatorInputValue(ushort inValue)
         {
             GlobalData.Instance.globalContext.Accumulator = (byte)inValue;
         }
+        [Node("РегистрФлагВход", "Вход", "Basic", "Allows to in to Accumulator.", IsCallable = false)]
+        public void CarryInputValue(ushort inValue)
+        {
+            GlobalData.Instance.globalContext.CarryFlag = (byte)inValue;
+        }
 
-        [Node("РегистрСчКоммВход", "Input", "Basic", "Allows to in to Accumulator.", IsCallable = false)]
+        [Node("РегистрСчКоммВход", "Вход", "Basic", "Allows to in to Accumulator.", IsCallable = false)]
         public void ProgramCounterInputValue(ushort inValue)
         {
             GlobalData.Instance.globalContext.ProgrammCounter = (byte)inValue;
@@ -51,6 +56,14 @@ namespace MathSample
         {
             outValue = GlobalData.Instance.globalContext.Accumulator;
         }
+
+        [Node("РегистрФлагВыход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
+        public void CarryOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.CarryFlag;
+        }
+
+
         [Node("РегистрСчКоммВыход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
         public void ProgramCounterOutputValue(out ushort outValue)
         {

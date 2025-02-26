@@ -12,23 +12,66 @@ namespace SampleCommon
     [Serializable]
     public class GlobalContext
     {
-        /* public byte AH;
-         public byte AL;
-
-         public ushort AX
-         {
-             get
-             {
-                 return (ushort)(AH * 256 + AL);
-             }
-             set
-             {
-                 AL = (byte)(value & 0xF);
-                 AH = (byte)(value >> 8);
-             }
-         }*/
         // # accumulator
-        public byte Accumulator;
+        public byte A;
+
+        public byte B;
+        public byte C;
+
+        public ushort BC
+        {
+            get
+            {
+                return (ushort)(B * 256 + C);
+            }
+            set
+            {
+                C = (byte)(value & 0xF);
+                B = (byte)(value >> 8);
+            }
+        }
+        public byte D;
+        public byte E;
+
+        public ushort DE
+        {
+            get
+            {
+                return (ushort)(D * 256 + E);
+            }
+            set
+            {
+                E = (byte)(value & 0xF);
+                D = (byte)(value >> 8);
+            }
+        }
+        public byte H;
+        public byte L;
+
+        public ushort M
+        {
+            get
+            {
+                return HL;
+            }
+            set
+            {
+                HL = value;
+            }
+        }
+
+        public ushort HL
+        {
+            get
+            {
+                return (ushort)(H * 256 + L);
+            }
+            set
+            {
+                L = (byte)(value & 0xF);
+                H = (byte)(value >> 8);
+            }
+        }
         // # program counter
         public byte ProgrammCounter;
         // # carry flag
@@ -47,9 +90,9 @@ namespace SampleCommon
             Memory = new byte[256];
             Code = new byte[256];
             Instruction = "";
-           // CodePointer = 0;
-          //  MemoryPointer = 0;
-           // AX = 0;
+            // CodePointer = 0;
+            //  MemoryPointer = 0;
+            // AX = 0;
         }
 
         public void Reset()
@@ -59,7 +102,7 @@ namespace SampleCommon
             Instruction = "";
             Accumulator = 0;
             ProgrammCounter = 0;
-          //  AX = 0;
+            //  AX = 0;
         }
     }
     public sealed class GlobalData
