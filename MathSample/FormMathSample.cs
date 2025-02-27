@@ -98,5 +98,63 @@ namespace MathSample
             controlNodeEditor.nodesControl.Clear();
             controlNodeEditor.nodesControl.model = model;
         }
+
+        private void lOADMEMORYToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.DefaultExt = "bin";
+                ofd.AddExtension = true;
+                ofd.Filter = "bin files|*.bin";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    BinaryReader binaryReader = new BinaryReader(File.Open(ofd.FileName, FileMode.Open));
+                    if (binaryReader.BaseStream.Length < 65535)
+                        return;
+                    GlobalData.Instance.globalContext.Memory = new byte[65535];
+                    for (int i = 0; i < 65535; i++)
+                    {
+                        GlobalData.Instance.globalContext.Memory[i] = binaryReader.ReadByte();
+                    }
+                    binaryReader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+        }
+
+        private void sAVEMEMORYToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog ofd = new SaveFileDialog();
+            ofd.DefaultExt = "bin";
+            ofd.AddExtension = true;
+            ofd.Filter = "bin files|*.bin";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    BinaryWriter binaryWriter = new BinaryWriter(File.OpenWrite(ofd.FileName));
+                    for (int i = 0; i < 65535; i++)
+                    {
+                        binaryWriter.Write(GlobalData.Instance.globalContext.Memory[i]);
+                    }
+                    binaryWriter.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.ShowDialog();
+        }
     }
 }
