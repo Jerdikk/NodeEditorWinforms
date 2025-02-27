@@ -48,15 +48,16 @@ namespace SampleCommon
         public byte H;
         public byte L;
 
-        public ushort M
+        public ushort PSW
         {
             get
             {
-                return HL;
+                return (ushort)(A * 256 + Flags);
             }
             set
             {
-                HL = value;
+                Flags = (byte)(value & 0xF);
+                A = (byte)(value >> 8);
             }
         }
 
@@ -72,24 +73,57 @@ namespace SampleCommon
                 H = (byte)(value >> 8);
             }
         }
+
+        public bool BitZ; //zero
+        public bool BitS; //negative value
+        public bool BitP; // parity bits
+        public bool BitC; // carry
+        public bool BitAC; // 4bit carry
+
         // # program counter
-        public byte ProgrammCounter;
+        public ushort ProgrammCounter;
+        public ushort StackPointer;
         // # carry flag
-        public byte CarryFlag;
+        public byte Flags
+        {
+            get
+            {
+                int t1 = (BitC ? 1 : 0) + 2;
+                t1 += (BitP ? 4 : 0);                
+                t1 += (BitAC ? 16 : 0);
+                t1 += (BitZ ? 64 : 0);
+                t1 += (BitS ? 128 : 0);
+                return (byte)(t1 & 255);
+            }
+            set
+            {
+                byte t2 = (byte)(value & 255);
+                BitS = ((t2 & 0b10000000) == 128);
+                BitZ = ((t2 & 0b1000000) == 64);
+                BitAC = ((t2 & 0b10000) == 16);
+                BitP = ((t2 & 0b100) == 4);
+                BitC = ((t2 & 0b1) == 1);
+            }
+        }
 
         //public byte CodePointer;
         //public byte MemoryPointer;
 
-        public byte[] Memory = new byte[256];
-        public byte[] Code = new byte[256];
+        public byte[] Memory;// = new byte[65535];
+        public byte[] Code;// = new byte[65535];
 
         public string Instruction;
 
         public GlobalContext()
         {
-            Memory = new byte[256];
-            Code = new byte[256];
+            Memory = new byte[65535];
+            Code = new byte[65535];
             Instruction = "";
+            ProgrammCounter = 0;
+            StackPointer = 0;
+          //  Flags = 255;
+            int yy = 1;
+
             // CodePointer = 0;
             //  MemoryPointer = 0;
             // AX = 0;
@@ -97,11 +131,12 @@ namespace SampleCommon
 
         public void Reset()
         {
-            Memory = new byte[256];
-            Code = new byte[256];
+            Memory = new byte[65535];
+            Code = new byte[65535];
             Instruction = "";
-            Accumulator = 0;
+            A = 0;
             ProgrammCounter = 0;
+            StackPointer = 0;
             //  AX = 0;
         }
     }

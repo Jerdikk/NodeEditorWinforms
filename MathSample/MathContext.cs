@@ -21,18 +21,18 @@ namespace MathSample
             outValue = inValue;
         }
 
-        [Node("РегистрAккВход", "Вход", "Basic", "Allows to in to Accumulator.", IsCallable = false)]
+        [Node("РегистрAккВход", "Вход", "Basic", "Allows to in to A.", IsCallable = false)]
         public void AccumulatorInputValue(ushort inValue)
         {
-            GlobalData.Instance.globalContext.Accumulator = (byte)inValue;
+            GlobalData.Instance.globalContext.A = (byte)inValue;
         }
-        [Node("РегистрФлагВход", "Вход", "Basic", "Allows to in to Accumulator.", IsCallable = false)]
+        [Node("РегистрФлагВход", "Вход", "Basic", "Allows to in to A.", IsCallable = false)]
         public void CarryInputValue(ushort inValue)
         {
-            GlobalData.Instance.globalContext.CarryFlag = (byte)inValue;
+            GlobalData.Instance.globalContext.Flags = (byte)inValue;
         }
 
-        [Node("РегистрСчКоммВход", "Вход", "Basic", "Allows to in to Accumulator.", IsCallable = false)]
+        [Node("РегистрСчКоммВход", "Вход", "Basic", "Allows to in to A.", IsCallable = false)]
         public void ProgramCounterInputValue(ushort inValue)
         {
             GlobalData.Instance.globalContext.ProgrammCounter = (byte)inValue;
@@ -54,13 +54,13 @@ namespace MathSample
         [Node("РегистрAккВыход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
         public void AccumulatorOutputValue(out ushort outValue)
         {
-            outValue = GlobalData.Instance.globalContext.Accumulator;
+            outValue = GlobalData.Instance.globalContext.A;
         }
 
         [Node("РегистрФлагВыход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
         public void CarryOutputValue(out ushort outValue)
         {
-            outValue = GlobalData.Instance.globalContext.CarryFlag;
+            outValue = GlobalData.Instance.globalContext.Flags;
         }
 
 
@@ -141,14 +141,14 @@ namespace MathSample
         [Node("Show Value","Helper","Basic","Shows input value in the message box.")]
         public void ShowMessageBox(ushort x)
         {
-            GlobalData.Instance.globalContext.Accumulator = (byte)x;
+            GlobalData.Instance.globalContext.A = (byte)x;
             MessageBox.Show(x.ToString(), "Show Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         [Node("Run node", "Helper", "Basic", "Runs one step.")]
         public void RunNode(ushort Acc, ushort PrC)
         {
-            GlobalData.Instance.globalContext.Accumulator = (byte)Acc;           
+            GlobalData.Instance.globalContext.A = (byte)Acc;           
             GlobalData.Instance.globalContext.ProgrammCounter = (byte)PrC;
         }
 

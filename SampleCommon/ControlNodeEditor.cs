@@ -14,16 +14,16 @@ namespace SampleCommon
         public ControlNodeEditor()
         {
             InitializeComponent();
-            accTextBox.Text = GlobalData.Instance.globalContext.Accumulator.ToString();
-            cfTextBox.Text = GlobalData.Instance.globalContext.CarryFlag.ToString();
+            accTextBox.Text = GlobalData.Instance.globalContext.A.ToString();
+            cfTextBox.Text = GlobalData.Instance.globalContext.Flags.ToString();
             prcTextBox.Text = GlobalData.Instance.globalContext.ProgrammCounter.ToString();
         }
 
         private void buttonProcess_Click(object sender, EventArgs e)
         {
             nodesControl.model.Execute();
-            accTextBox.Text = GlobalData.Instance.globalContext.Accumulator.ToString();
-            cfTextBox.Text = GlobalData.Instance.globalContext.CarryFlag.ToString();
+            accTextBox.Text = GlobalData.Instance.globalContext.A.ToString();
+            cfTextBox.Text = GlobalData.Instance.globalContext.Flags.ToString();
             prcTextBox.Text = GlobalData.Instance.globalContext.ProgrammCounter.ToString();
         }
     }
