@@ -21,6 +21,13 @@ namespace MathSample
             outValue = inValue;
         }
 
+        [Node("ПамятьВход", "Вход", "Basic", "Allows to in to A.", IsCallable = false)]
+        public void MemoryInputValue(ushort addr, byte inValue)
+        {
+            GlobalData.Instance.globalContext.Memory[addr] = (byte)inValue;
+        }
+
+
         [Node("РегистрAккВход", "Вход", "Basic", "Allows to in to A.", IsCallable = false)]
         public void AccumulatorInputValue(ushort inValue)
         {
@@ -75,16 +82,7 @@ namespace MathSample
         {
             outValue = GlobalData.Instance.globalContext.Code[GlobalData.Instance.globalContext.ProgrammCounter];
         }
-        [Node("ПамятьКомандВыход+1", "Выход", "Basic", "Allows to output value from code memory.", IsCallable = false, IsOnlyOut = true)]
-        public void ProgramMemoryOutputValue2(out ushort outValue)
-        {
-            outValue = GlobalData.Instance.globalContext.Code[GlobalData.Instance.globalContext.ProgrammCounter+1];
-        }
-        [Node("ПамятьКомандВыход+2", "Выход", "Basic", "Allows to output value from code memory.", IsCallable = false, IsOnlyOut = true)]
-        public void ProgramMemoryOutputValue3(out ushort outValue)
-        {
-            outValue = GlobalData.Instance.globalContext.Code[GlobalData.Instance.globalContext.ProgrammCounter+2];
-        }
+    
 
         [Node("Add","Operators","Basic","Adds two input values.",IsCallable = false)]
         public void Add(ushort a, ushort b, out ushort result)
