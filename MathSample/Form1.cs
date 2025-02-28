@@ -17,13 +17,6 @@ namespace MathSample
         public Form1()
         {
             InitializeComponent();
-
-            /*for (int i = 0; i < 8; i++)
-                for (int j = 0; j < 8; j++)
-                {
-                    panels[i, j] = new Panel();
-                    tableLayoutPanel1.Controls.Add(panels[i, j], i, j);
-                }*/
             try
             {
                 BinaryReader binaryReader = new BinaryReader(File.Open("zg.rom", FileMode.Open));
@@ -36,62 +29,65 @@ namespace MathSample
 
                 binaryReader.Close();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void DrawSymbol(int x, int y, int symbolCode)
         {
-            int yyy = symbolCode << 3;
-            for (int i = 0; i < 8; i++)
+            try
             {
-                byte b = (byte)data[yyy + i];
-                for (int j = 0; j < 6; j++)
+                int yyy = symbolCode << 3;
+                for (int i = 0; i < 8; i++)
                 {
-                    if ((b & (0b1 << j)) == 0)
+                    byte b = (byte)data[yyy + i];
+                    for (int j = 0; j < 6; j++)
                     {
-                        //      bb[counter] = 1;
-                        panels[7 - j, i] = 1;//.BackColor = Color.Black;
+                        if ((b & (0b1 << j)) == 0)
+                        {
+                            panels[7 - j, i] = 1;
+                        }
+                        else
+                        {
+                            panels[7 - j, i] = 0;
+                        }
                     }
-                    else
-                    {
-                        //     bb[counter] = 0;
-                        panels[7 - j, i] = 0;//.BackColor = Color.LightGray;
-                    }
-                    // counter++;
                 }
 
+                for (int i = 2; i < 8; i++)
+                    for (int j = 0; j < 8; j++)
+                    {
+                        paintsControl1.data[x * 6 + i, y * 8 + j] = panels[i, j];
+                    }
             }
-
-            for (int i = 2; i < 8; i++)
-                for (int j = 0; j < 8; j++)
-                {
-                    paintsControl1.data[x * 6 + i, y * 8 + j] = panels[i, j];
-                }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string t1 = textBox1.Text;
-            int g1 = 0;
-
-            ushort g2 = 0;
-
             try
-            {
-                g1 = int.Parse(t1);
-                g2 = (ushort)(g1 << 3);
+            {               
+                
+                ushort g2 = (ushort)((int.Parse(textBox1.Text)) << 3);
+
+                int counter = 0;
+
+                for (int j = 0; j < 8; j++)
+                    for (int i = 0; i < 16; i++)
+                    {
+                        DrawSymbol(10 + i, 10 + j, counter++);
+                    }
             }
-            catch { }
-
-            int counter = 0;
-
-            for (int j = 0; j < 8; j++)
-                for (int i = 0; i < 16; i++)
-                {
-                    DrawSymbol(10 + i, 10 + j, counter++);
-                }         
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
         }
 
