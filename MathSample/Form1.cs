@@ -12,18 +12,18 @@ namespace MathSample
 {
     public partial class Form1 : Form
     {
-        Panel[,] panels = new Panel[8, 8];
+        byte[,] panels = new byte[8, 8];
         byte[] data;
         public Form1()
         {
             InitializeComponent();
 
-            for (int i = 0; i < 8; i++)
+            /*for (int i = 0; i < 8; i++)
                 for (int j = 0; j < 8; j++)
                 {
                     panels[i, j] = new Panel();
                     tableLayoutPanel1.Controls.Add(panels[i, j], i, j);
-                }
+                }*/
             try
             {
                 BinaryReader binaryReader = new BinaryReader(File.Open("zg.rom", FileMode.Open));
@@ -39,6 +39,38 @@ namespace MathSample
             catch { }
         }
 
+        public void DrawSymbol(int x, int y, int symbolCode)
+        {
+            int yyy = symbolCode << 3;
+            for (int i = 0; i < 8; i++)
+            {
+                byte b = (byte)data[yyy + i];
+                for (int j = 0; j < 6; j++)
+                {
+                    if ((b & (0b1 << j)) == 0)
+                    {
+                        //      bb[counter] = 1;
+                        panels[7 - j, i] = 1;//.BackColor = Color.Black;
+                    }
+                    else
+                    {
+                        //     bb[counter] = 0;
+                        panels[7 - j, i] = 0;//.BackColor = Color.LightGray;
+                    }
+                    // counter++;
+                }
+
+            }
+
+            for (int i = 2; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                {
+                    paintsControl1.data[x * 6 + i, y * 8 + j] = panels[i, j];
+                }
+
+        }
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             string t1 = textBox1.Text;
@@ -53,45 +85,15 @@ namespace MathSample
             }
             catch { }
 
-           // byte[] bb = new byte[64];
-          //  int counter = 0;
+            int counter = 0;
 
-            for (int i = 0; i < 8; i++)
-            {
-                byte b = (byte)data[g2 + i];
-                for (int j = 0; j < 6; j++)
+            for (int j = 0; j < 8; j++)
+                for (int i = 0; i < 16; i++)
                 {
-                    if ((b & (0b1 << j)) == 0)
-                    {
-                  //      bb[counter] = 1;
-                        panels[7-j, i].BackColor = Color.Black;
-                    }
-                    else
-                    {
-                   //     bb[counter] = 0;
-                        panels[7-j, i].BackColor = Color.LightGray;
-                    }
-                   // counter++;
-                }
-                             
-            }
-            /*
-            counter = 0;
-            for (int i = 0; i < 8; i++)
-                for (int j = 0; j < 6; j++)
-                {
-                    if (bb[counter] == 1)
-                        panels[i, j].BackColor = Color.Black;
-                    else
-                        panels[i, j].BackColor = Color.White;
-                    counter++;
-                }*/
+                    DrawSymbol(10 + i, 10 + j, counter++);
+                }         
 
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
