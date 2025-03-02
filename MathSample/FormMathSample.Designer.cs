@@ -76,21 +76,21 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -114,21 +114,21 @@
             // lOADMEMORYToolStripMenuItem
             // 
             this.lOADMEMORYToolStripMenuItem.Name = "lOADMEMORYToolStripMenuItem";
-            this.lOADMEMORYToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lOADMEMORYToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.lOADMEMORYToolStripMenuItem.Text = "LOAD MEMORY";
             this.lOADMEMORYToolStripMenuItem.Click += new System.EventHandler(this.lOADMEMORYToolStripMenuItem_Click);
             // 
             // sAVEMEMORYToolStripMenuItem
             // 
             this.sAVEMEMORYToolStripMenuItem.Name = "sAVEMEMORYToolStripMenuItem";
-            this.sAVEMEMORYToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sAVEMEMORYToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.sAVEMEMORYToolStripMenuItem.Text = "SAVE MEMORY";
             this.sAVEMEMORYToolStripMenuItem.Click += new System.EventHandler(this.sAVEMEMORYToolStripMenuItem_Click);
             // 
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.testToolStripMenuItem.Text = "test";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 

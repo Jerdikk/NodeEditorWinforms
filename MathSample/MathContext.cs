@@ -39,17 +39,25 @@ namespace MathSample
             GlobalData.Instance.globalContext.Flags = (byte)inValue;
         }
 
-        [Node("РегистрСчКоммВход", "Вход", "Basic", "Allows to in to A.", IsCallable = false)]
+        [Node("РегистрСчКоммВход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
         public void ProgramCounterInputValue(ushort inValue)
         {
             GlobalData.Instance.globalContext.ProgrammCounter = (byte)inValue;
         }
 
-        [Node("ЗначПамятиВыход", "Выход", "Basic", "Allows to output a simple value.", IsCallable = false, IsOnlyOut = true)]
+        [Node("ЗначПамятиВыход", "Выход", "Basic", "Allows to output a simple value.", IsCallable = false, IsOnlyOut = false)]
         public void MemoryOutputValue(ushort inValue, out ushort outValue)
         {
-            inValue &= 255;
-            outValue = GlobalData.Instance.globalContext.Memory[inValue];
+            try
+            {
+                inValue &= 65535;
+                outValue = GlobalData.Instance.globalContext.Memory[inValue];
+            }
+            catch (Exception e)
+            {
+                outValue = 0;
+                MessageBox.Show(e.Message);
+            }
         }
 
         [Node("ЗначВыход", "Выход", "Basic", "Allows to output a simple value.", IsCallable = false, IsOnlyOut = true)]

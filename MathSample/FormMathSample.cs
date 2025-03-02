@@ -89,8 +89,7 @@ namespace MathSample
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            model.Clear();
-            
+            model.Clear();            
             model.Deserialize(File.ReadAllBytes("0.nds"));
             model.Execute();
             model.Deserialize(File.ReadAllBytes("0.nds"));
