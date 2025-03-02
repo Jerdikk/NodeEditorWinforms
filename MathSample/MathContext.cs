@@ -206,6 +206,19 @@ namespace MathSample
             result = (ushort)(a % b);
         }
 
+        [Node("GetHiByte", "Operators", "Basic", "Divides two input values.", IsCallable = false)]
+        public void GetHighByte(ushort a, out ushort result)
+        {
+
+            result = (ushort)(a >> 8);
+        }
+        [Node("GetLoByte", "Operators", "Basic", "Divides two input values.", IsCallable = false)]
+        public void GetLowByte(ushort a, out ushort result)
+        {
+
+            result = (ushort)(a & 255);
+        }
+
         [Node(">", "Operators", "Basic", "Divides two input values.", IsCallable = false)]
         public void More(ushort a, ushort b, out bool result)
         {
