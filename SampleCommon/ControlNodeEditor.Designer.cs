@@ -33,6 +33,12 @@
             this.nodesControl = new NodeEditor.NodesControl();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.prcTextBox = new System.Windows.Forms.TextBox();
             this.cfTextBox = new System.Windows.Forms.TextBox();
             this.accTextBox = new System.Windows.Forms.TextBox();
@@ -40,12 +46,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonProcess = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,8 +73,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(754, 545);
-            this.splitContainer1.SplitterDistance = 456;
+            this.splitContainer1.Size = new System.Drawing.Size(807, 545);
+            this.splitContainer1.SplitterDistance = 488;
             this.splitContainer1.TabIndex = 0;
             // 
             // panel
@@ -81,7 +84,7 @@
             this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(456, 545);
+            this.panel.Size = new System.Drawing.Size(488, 545);
             this.panel.TabIndex = 0;
             // 
             // nodesControl
@@ -105,6 +108,9 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.button3);
+            this.splitContainer2.Panel2.Controls.Add(this.label6);
+            this.splitContainer2.Panel2.Controls.Add(this.textBox3);
             this.splitContainer2.Panel2.Controls.Add(this.button2);
             this.splitContainer2.Panel2.Controls.Add(this.button1);
             this.splitContainer2.Panel2.Controls.Add(this.textBox2);
@@ -118,7 +124,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label2);
             this.splitContainer2.Panel2.Controls.Add(this.label1);
             this.splitContainer2.Panel2.Controls.Add(this.buttonProcess);
-            this.splitContainer2.Size = new System.Drawing.Size(294, 518);
+            this.splitContainer2.Size = new System.Drawing.Size(315, 518);
             this.splitContainer2.SplitterDistance = 200;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -127,8 +133,60 @@
             this.propertyGrid.Dock = System.Windows.Forms.DockStyle.Top;
             this.propertyGrid.Location = new System.Drawing.Point(0, 0);
             this.propertyGrid.Name = "propertyGrid";
-            this.propertyGrid.Size = new System.Drawing.Size(294, 196);
+            this.propertyGrid.Size = new System.Drawing.Size(315, 196);
             this.propertyGrid.TabIndex = 1;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(146, 214);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Изменить";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(45, 214);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Запросить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(136, 177);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 10;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(136, 148);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(21, 181);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Значение";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(21, 152);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Ячейка памяти";
             // 
             // prcTextBox
             // 
@@ -183,63 +241,37 @@
             this.buttonProcess.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonProcess.Location = new System.Drawing.Point(0, 0);
             this.buttonProcess.Name = "buttonProcess";
-            this.buttonProcess.Size = new System.Drawing.Size(294, 23);
+            this.buttonProcess.Size = new System.Drawing.Size(315, 23);
             this.buttonProcess.TabIndex = 0;
             this.buttonProcess.Text = "Process";
             this.buttonProcess.UseVisualStyleBackColor = true;
             this.buttonProcess.Click += new System.EventHandler(this.buttonProcess_Click);
             // 
-            // label4
+            // textBox3
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 152);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Ячейка памяти";
+            this.textBox3.Location = new System.Drawing.Point(136, 112);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 13;
             // 
-            // label5
+            // label6
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 181);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Значение";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(21, 116);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Указатель стека";
             // 
-            // textBox1
+            // button3
             // 
-            this.textBox1.Location = new System.Drawing.Point(136, 148);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 9;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(136, 177);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 10;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(45, 214);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Запросить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(146, 214);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Изменить";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button3.Location = new System.Drawing.Point(242, 85);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(65, 23);
+            this.button3.TabIndex = 15;
+            this.button3.Text = "Сброс";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // ControlNodeEditor
             // 
@@ -248,7 +280,7 @@
             this.Controls.Add(this.splitContainer1);
             this.MaximumSize = new System.Drawing.Size(1800, 1600);
             this.Name = "ControlNodeEditor";
-            this.Size = new System.Drawing.Size(754, 545);
+            this.Size = new System.Drawing.Size(807, 545);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -283,5 +315,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button3;
     }
 }

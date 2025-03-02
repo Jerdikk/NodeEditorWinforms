@@ -17,6 +17,7 @@ namespace SampleCommon
             accTextBox.Text = GlobalData.Instance.globalContext.A.ToString();
             cfTextBox.Text = GlobalData.Instance.globalContext.Flags.ToString();
             prcTextBox.Text = GlobalData.Instance.globalContext.ProgrammCounter.ToString();
+            textBox3.Text = GlobalData.Instance.globalContext.StackPointer.ToString();
         }
 
         private void buttonProcess_Click(object sender, EventArgs e)
@@ -25,6 +26,7 @@ namespace SampleCommon
             accTextBox.Text = GlobalData.Instance.globalContext.A.ToString();
             cfTextBox.Text = GlobalData.Instance.globalContext.Flags.ToString();
             prcTextBox.Text = GlobalData.Instance.globalContext.ProgrammCounter.ToString();
+            textBox3.Text = GlobalData.Instance.globalContext.StackPointer.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -72,6 +74,12 @@ namespace SampleCommon
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            GlobalData.Instance.globalContext.ProgrammCounter = 0;
+            prcTextBox.Text = GlobalData.Instance.globalContext.ProgrammCounter.ToString();
         }
     }
 }

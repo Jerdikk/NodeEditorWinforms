@@ -33,6 +33,39 @@ namespace MathSample
         {
             GlobalData.Instance.globalContext.A = (byte)inValue;
         }
+
+        [Node("РегB_Вход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
+        public void RegBInputValue(ushort inValue)
+        {
+            GlobalData.Instance.globalContext.B = (byte)inValue;
+        }
+        [Node("РегC_Вход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
+        public void RegCInputValue(ushort inValue)
+        {
+            GlobalData.Instance.globalContext.C = (byte)inValue;
+        }
+        [Node("РегD_Вход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
+        public void RegDInputValue(ushort inValue)
+        {
+            GlobalData.Instance.globalContext.D = (byte)inValue;
+        }
+        [Node("РегE_Вход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
+        public void RegEInputValue(ushort inValue)
+        {
+            GlobalData.Instance.globalContext.E = (byte)inValue;
+        }
+        [Node("РегH_Вход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
+        public void RegHInputValue(ushort inValue)
+        {
+            GlobalData.Instance.globalContext.H = (byte)inValue;
+        }
+        [Node("РегL_Вход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
+        public void RegLInputValue(ushort inValue)
+        {
+            GlobalData.Instance.globalContext.L = (byte)inValue;
+        }
+
+
         [Node("РегистрФлагВход", "Вход", "Basic", "Allows to in to A.", IsCallable = false)]
         public void CarryInputValue(ushort inValue)
         {
@@ -43,6 +76,11 @@ namespace MathSample
         public void ProgramCounterInputValue(ushort inValue)
         {
             GlobalData.Instance.globalContext.ProgrammCounter = (ushort)inValue;
+        }
+        [Node("УказательСтекаВход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
+        public void StackPointerInputValue(ushort inValue)
+        {
+            GlobalData.Instance.globalContext.StackPointer = (ushort)inValue;
         }
 
         [Node("ЗначПамятиВыход", "Выход", "Basic", "Allows to output a simple value.", IsCallable = false, IsOnlyOut = false)]
@@ -71,6 +109,54 @@ namespace MathSample
         {
             outValue = GlobalData.Instance.globalContext.A;
         }
+
+        [Node("РегистрB_Выход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
+        public void RegBOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.B;
+        }
+        [Node("РегистрC_Выход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
+        public void RegCOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.C;
+        }
+        [Node("РегистрD_Выход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
+        public void RegDOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.D;
+        }
+        [Node("РегистрE_Выход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
+        public void RegEOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.E;
+        }
+        [Node("РегистрH_Выход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
+        public void RegHOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.H;
+        }
+        [Node("РегистрL_Выход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
+        public void RegLOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.L;
+        }
+        [Node("РегистрBC_Выход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
+        public void RegBCOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.BC;
+        }
+        [Node("РегистрDE_Выход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
+        public void RegDEOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.DE;
+        }
+        [Node("РегистрHL_Выход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
+        public void RegHLOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.HL;
+        }
+
+
 
         [Node("РегистрФлагВыход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
         public void CarryOutputValue(out ushort outValue)
