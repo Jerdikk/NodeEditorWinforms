@@ -21,14 +21,14 @@ namespace MathSample
             outValue = inValue;
         }
 
-        [Node("ПамятьВход", "Вход", "Basic", "Allows to in to A.", IsCallable = false)]
-        public void MemoryInputValue(ushort addr, byte inValue)
+        [Node("ПамятьВход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
+        public void MemoryInputValue(ushort addr, ushort inValue)
         {
             GlobalData.Instance.globalContext.Memory[addr] = (byte)inValue;
         }
 
 
-        [Node("РегистрAккВход", "Вход", "Basic", "Allows to in to A.", IsCallable = false)]
+        [Node("РегистрAккВход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
         public void AccumulatorInputValue(ushort inValue)
         {
             GlobalData.Instance.globalContext.A = (byte)inValue;
@@ -42,7 +42,7 @@ namespace MathSample
         [Node("РегистрСчКоммВход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
         public void ProgramCounterInputValue(ushort inValue)
         {
-            GlobalData.Instance.globalContext.ProgrammCounter = (byte)inValue;
+            GlobalData.Instance.globalContext.ProgrammCounter = (ushort)inValue;
         }
 
         [Node("ЗначПамятиВыход", "Выход", "Basic", "Allows to output a simple value.", IsCallable = false, IsOnlyOut = false)]
