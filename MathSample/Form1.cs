@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SampleCommon;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -72,16 +73,17 @@ namespace MathSample
         private void button1_Click(object sender, EventArgs e)
         {
             try
-            {               
-                
-                ushort g2 = (ushort)((int.Parse(textBox1.Text)) << 3);
+            {
+
+                ushort g2 = 30656;// (ushort)((int.Parse(textBox1.Text)) << 3);
 
                 int counter = 0;
 
-                for (int j = 0; j < 8; j++)
-                    for (int i = 0; i < 16; i++)
+                for (int j = 0; j < 26; j++)
+                    for (int i = 0; i < 64; i++)
                     {
-                        DrawSymbol(10 + i, 10 + j, counter++);
+                        int h = GlobalData.Instance.globalContext.Memory[i+j*80+g2];
+                        DrawSymbol(i, j, h);
                     }
             }
             catch (Exception ex)
