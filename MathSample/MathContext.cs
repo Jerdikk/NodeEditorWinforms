@@ -11,7 +11,7 @@ namespace MathSample
     // Main context of the sample, each
     // method corresponds to a node by attribute decoration
     public class MathContext : INodesContext
-    {
+    {        
         public NodeVisual CurrentProcessingNode { get; set; }
         public event Action<string, NodeVisual, FeedbackType, object, bool> FeedbackInfo;
 
@@ -77,6 +77,9 @@ namespace MathSample
         {
             GlobalData.Instance.globalContext.ProgrammCounter = (ushort)inValue;
         }
+
+        
+
         [Node("УказательСтекаВход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
         public void StackPointerInputValue(ushort inValue)
         {
@@ -98,7 +101,7 @@ namespace MathSample
             }
         }
 
-        [Node("ЗначВыход", "Выход", "Basic", "Allows to output a simple value.", IsCallable = false, IsOnlyOut = true)]
+        [Node("ЗначВыход", "Выход", "Basic", "Allows to output a simple value.", IsCallable = false, IsOnlyOut = true/*, CustomEditor = typeof(NumericUpDown)*/)]
         public void OutputValue(ushort inValue, out ushort outValue)
         {
             outValue = inValue;

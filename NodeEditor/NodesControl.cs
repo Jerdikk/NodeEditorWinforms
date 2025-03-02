@@ -608,7 +608,7 @@ namespace NodeEditor
             var connections = el.AppendChild(xml.CreateElement("Connections"));
             foreach (var conn in model.graph.Connections)
             {
-                var xmlConn = (XmlElement)nodes.AppendChild(xml.CreateElement("Connection"));
+                var xmlConn = (XmlElement)connections.AppendChild(xml.CreateElement("Connection"));
                 xmlConn.SetAttribute("OutputNodeId", conn.OutputNode.GetGuid());
                 xmlConn.SetAttribute("OutputNodeSocket", conn.OutputSocketName);
                 xmlConn.SetAttribute("InputNodeId", conn.InputNode.GetGuid());
