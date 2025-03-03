@@ -120,7 +120,7 @@ namespace SampleCommon
             Code = new byte[65535];
             Instruction = "";
             ProgrammCounter = 0;
-            StackPointer = 0;
+            StackPointer = 65535;
           //  Flags = 255;
             int yy = 1;
 
@@ -136,7 +136,7 @@ namespace SampleCommon
             Instruction = "";
             A = 0;
             ProgrammCounter = 0;
-            StackPointer = 0;
+            StackPointer = 65535;
             //  AX = 0;
         }
     }

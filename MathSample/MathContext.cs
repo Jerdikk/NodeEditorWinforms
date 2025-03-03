@@ -179,7 +179,12 @@ namespace MathSample
         {
             outValue = GlobalData.Instance.globalContext.Code[GlobalData.Instance.globalContext.ProgrammCounter];
         }
-    
+
+        [Node("УказательСтекаВыход", "Выход", "Basic", "Allows to in to A.", IsCallable = false, IsOnlyOut = true)]
+        public void StackPointerOutputValue(out ushort outValue)
+        {
+            outValue = GlobalData.Instance.globalContext.StackPointer;
+        }
 
         [Node("Add","Operators","Basic","Adds two input values.",IsCallable = false)]
         public void Add(ushort a, ushort b, out ushort result)
