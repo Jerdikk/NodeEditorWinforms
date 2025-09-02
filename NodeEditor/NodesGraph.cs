@@ -45,19 +45,7 @@ namespace NodeEditor
             var cpen = Pens.Black;
             var epen = new Pen(Color.Gold, 3);
             var epen2 = new Pen(Color.Black, 5);
-            foreach (var connection in Connections.Where(x=>x.IsExecution))
-            {
-                var osoc = connection.OutputNode.GetSockets().FirstOrDefault(x => x.Name == connection.OutputSocketName);
-                var beginSocket = osoc.GetBounds();
-                var isoc = connection.InputNode.GetSockets().FirstOrDefault(x => x.Name == connection.InputSocketName);
-                var endSocket = isoc.GetBounds();
-                var begin = beginSocket.Location + new SizeF(beginSocket.Width / 2f, beginSocket.Height / 2f);
-                var end = endSocket.Location += new SizeF(endSocket.Width / 2f, endSocket.Height / 2f);                               
-
-                DrawConnection(g, epen2, begin, end);
-                DrawConnection(g, epen, begin, end);                
-            }
-            foreach (var connection in Connections.Where(x => !x.IsExecution))
+            foreach (var connection in Connections)//.Where(x=>x.IsExecution))
             {
                 var osoc = connection.OutputNode.GetSockets().FirstOrDefault(x => x.Name == connection.OutputSocketName);
                 var beginSocket = osoc.GetBounds();
@@ -65,10 +53,18 @@ namespace NodeEditor
                 var endSocket = isoc.GetBounds();
                 var begin = beginSocket.Location + new SizeF(beginSocket.Width / 2f, beginSocket.Height / 2f);
                 var end = endSocket.Location += new SizeF(endSocket.Width / 2f, endSocket.Height / 2f);
-                
-                DrawConnection(g, cpen, begin, end);
-               
+
+                if (connection.IsExecution)
+                {
+                    DrawConnection(g, epen2, begin, end);
+                    DrawConnection(g, epen, begin, end);
+                }
+                else
+                {
+                    DrawConnection(g, cpen, begin, end);
+                }
             }
+
 
             var orderedNodes = Nodes.OrderByDescending(x => x.Order);
             foreach (var node in orderedNodes)
@@ -90,7 +86,7 @@ namespace NodeEditor
             {
                 float amount = i/(float) (interpolation - 1);
                
-                var lx = Lerp(output.X, input.X, amount);
+              //  var lx = Lerp(output.X, input.X, amount);
                 var d = Math.Min(Math.Abs(input.X - output.X), 100);
                 var a = new PointF((float) Scale(amount, 0, 1, output.X, output.X + d),
                     output.Y);
@@ -108,8 +104,8 @@ namespace NodeEditor
                 }
                 amount = (float)cos * -0.5f + 0.5f;
 
-                var f = Lerp(a, b, amount);
-                points[i] = f;
+                //var f = 
+                points[i] = Lerp(a, b, amount);
             }
 
             g.DrawLines(pen, points);
@@ -136,12 +132,13 @@ namespace NodeEditor
 
         public static PointF Lerp(PointF a, PointF b, float amount)
         {
-            PointF result = new PointF();
+            return new PointF(Lerp(a.X, b.X, amount), Lerp(a.Y, b.Y, amount));
+            //PointF result = new PointF(Lerp(a.X,b.X,amount), Lerp(a.Y, b.Y, amount));
 
-            result.X = a.X*(1f - amount) + b.X*amount;
-            result.Y = a.Y*(1f - amount) + b.Y*amount;
+            //result.X = a.X*(1f - amount) + b.X*amount;
+            //result.Y = a.Y*(1f - amount) + b.Y*amount;
 
-            return result;
+            //return result;
         }
     }
 }
