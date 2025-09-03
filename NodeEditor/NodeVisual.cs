@@ -264,20 +264,34 @@ namespace NodeEditor
 
         internal ParameterInfo[] GetInputs(bool isIs)
         {
-            NodeAttribute t1 = Type.GetCustomAttributes(typeof(NodeAttribute), false)
-                                        .Cast<NodeAttribute>()
-                                        .FirstOrDefault();
-            if ((t1 != null)&&(!isIs))
-                if (t1.IsOnlyOut) 
-                {
-                    return new ParameterInfo[0];
-                }
-            return Type.GetParameters().Where(x => !x.IsOut).ToArray();
+            try
+            {
+                NodeAttribute t1 = Type.GetCustomAttributes(typeof(NodeAttribute), false)
+                                            .Cast<NodeAttribute>()
+                                            .FirstOrDefault();
+                if ((t1 != null) && (!isIs))
+                    if (t1.IsOnlyOut)
+                    {
+                        return new ParameterInfo[0];
+                    }
+                return Type.GetParameters().Where(x => !x.IsOut).ToArray();
+            }
+            catch (Exception ex)
+            {
+                return new ParameterInfo[0];
+            }
         }
 
         internal ParameterInfo[] GetOutputs()
         {
-            return Type.GetParameters().Where(x => x.IsOut).ToArray();
+            try
+            {
+                return Type.GetParameters().Where(x => x.IsOut).ToArray();
+            }
+            catch (Exception ex)
+            {
+                return new ParameterInfo[0];
+            }
         }
 
         /// <summary>

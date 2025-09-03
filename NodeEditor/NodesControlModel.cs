@@ -139,7 +139,7 @@ namespace NodeEditor
                         //Execute(connection.InputNode);
 
                         if (init.Name.Equals("Bool node"))
-                        {                            
+                        {
                             foreach (SocketVisual t3 in init.GetSockets())
                             {
                                 if ((t3 != null) && (t3.Name.Equals("condition")))
@@ -150,9 +150,9 @@ namespace NodeEditor
                                         connection = graph.Connections.FirstOrDefault(x => x.OutputNode == init && x.IsExecution && !x.OutputSocket.IsMainExecution);
                                     }
                                 }
-                            }                            
+                            }
                         }
-                        
+
                         nodeQueue.Enqueue(connection.InputNode);
                     }
                     else
@@ -423,14 +423,20 @@ namespace NodeEditor
                 var customEditorAssembly = br.ReadString();
                 var customEditor = br.ReadString();
                 nv.Type = Context.GetType().GetMethod(br.ReadString());
-                var attribute = nv.Type.GetCustomAttributes(typeof(NodeAttribute), false)
-                                            .Cast<NodeAttribute>()
-                                            .FirstOrDefault();
-                if (attribute != null)
+
+                try
                 {
-                    nv.CustomWidth = attribute.Width;
-                    nv.CustomHeight = attribute.Height;
+                    var attribute = nv.Type.GetCustomAttributes(typeof(NodeAttribute), false)
+                                                .Cast<NodeAttribute>()
+                                                .FirstOrDefault();
+
+                    if (attribute != null)
+                    {
+                        nv.CustomWidth = attribute.Width;
+                        nv.CustomHeight = attribute.Height;
+                    }
                 }
+                catch { }
             (nv.GetNodeContext() as DynamicNodeContext).Deserialize(br.ReadBytes(br.ReadInt32()));
                 var additional = br.ReadInt32(); //read additional data
                 if (additional >= 4)

@@ -11,7 +11,7 @@ namespace MathSample
     // Main context of the sample, each
     // method corresponds to a node by attribute decoration
     public class MathContext : INodesContext
-    {        
+    {
         public NodeVisual CurrentProcessingNode { get; set; }
         public event Action<string, NodeVisual, FeedbackType, object, bool> FeedbackInfo;
 
@@ -78,7 +78,7 @@ namespace MathSample
             GlobalData.Instance.globalContext.ProgrammCounter = (ushort)inValue;
         }
 
-        
+
 
         [Node("УказательСтекаВход", "Вход", "Basic", "Allows to in to A.", IsCallable = true)]
         public void StackPointerInputValue(ushort inValue)
@@ -106,6 +106,13 @@ namespace MathSample
         {
             outValue = inValue;
         }
+
+        [Node("ЗначВыходБайт", "Выход", "Basic", "Allows to output a simple value.", IsCallable = false, IsOnlyOut = true/*, CustomEditor = typeof(NumericUpDown)*/)]
+        public void OutputValueByte(int inValue, out byte outValue)
+        {
+            outValue = (byte)inValue;
+        }
+
 
         [Node("РегистрAккВыход", "Выход", "Basic", "Allows to output a simple value1.", IsCallable = false, IsOnlyOut = true)]
         public void AccumulatorOutputValue(out ushort outValue)
@@ -186,7 +193,7 @@ namespace MathSample
             outValue = GlobalData.Instance.globalContext.StackPointer;
         }
 
-        [Node("Add","Operators","Basic","Adds two input values.",IsCallable = false)]
+        [Node("Add", "Operators", "Basic", "Adds two input values.", IsCallable = false)]
         public void Add(ushort a, ushort b, out ushort result)
         {
             result = (ushort)(a + b);
@@ -207,7 +214,7 @@ namespace MathSample
         [Node("Divide", "Operators", "Basic", "Divides two input values.", IsCallable = false)]
         public void Divid(ushort a, ushort b, out ushort result)
         {
-            
+
             result = (ushort)(a % b);
         }
 
@@ -244,14 +251,42 @@ namespace MathSample
             result = a == b;
         }
 
-        [Node("Not", "Operators", "Basic", "Divides two input values.", IsCallable = false)]
+        [Node("AND_BIT", "Operators", "Basic", "Ands two input values.", IsCallable = false)]
+        public void Eandbit(byte a, byte b, out byte result)
+        {
+            int a1 = a > 0 ? 1 : 0;
+            int b1 = b > 0 ? 1 : 0;
+            result = (byte)(a1 * b1);            
+        }
+        [Node("NAND_BIT", "Operators", "Basic", "Ands two input values.", IsCallable = false)]
+        public void Enandbit(byte a, byte b, out byte result)
+        {
+            int a1 = a > 0 ? 1 : 0;
+            int b1 = b > 0 ? 1 : 0;
+            result = (byte)((a1 * b1)>0?0:1);
+        }
+
+        [Node("OR_BIT", "Operators", "Basic", "Ands two input values.", IsCallable = false)]
+        public void Eorbit(byte a, byte b, out byte result)
+        {
+            int a1 = a > 0 ? 1 : 0;
+            int b1 = b > 0 ? 1 : 0;            
+            result = (byte)((a1 + b1)>0?1:0);
+        }
+        [Node("NOT_BIT", "Operators", "Basic", "Ands two input values.", IsCallable = false)]
+        public void Enotbit(byte a, out byte result)
+        {                
+            result = (byte)(a > 0 ? 0 : 1);
+        }
+
+        [Node("Not", "Operators", "Basic", "Inverts input value.", IsCallable = false)]
         public void Enot(bool a, out bool result)
         {
 
             result = !a;
         }
 
-        [Node("Show Value","Helper","Basic","Shows input value in the message box.")]
+        [Node("Show Value", "Helper", "Basic", "Shows input value in the message box.")]
         public void ShowMessageBox(ushort x)
         {
             GlobalData.Instance.globalContext.A = (byte)x;
@@ -261,22 +296,22 @@ namespace MathSample
         [Node("Run node", "Helper", "Basic", "Runs one step.")]
         public void RunNode(ushort Acc, ushort PrC)
         {
-            GlobalData.Instance.globalContext.A = (byte)Acc;           
+            GlobalData.Instance.globalContext.A = (byte)Acc;
             GlobalData.Instance.globalContext.ProgrammCounter = (byte)PrC;
         }
 
         [Node("Bool node", "Helper", "Basic", "Runs one step.", OutExec = 2)]
         public void BoolNode(bool condition)
         {
-            
+
         }
 
 
 
-        [Node("Starter","Helper","Basic","Starts execution",true,true)]
+        [Node("Starter", "Helper", "Basic", "Starts execution", true, true)]
         public void Starter()
         {
-            
+
         }
     }
 }
