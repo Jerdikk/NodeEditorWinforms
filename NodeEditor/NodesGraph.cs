@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -32,44 +33,54 @@ namespace NodeEditor
 
         public void Draw(Graphics g, Point mouseLocation, MouseButtons mouseButtons)
         {
-            g.InterpolationMode = InterpolationMode.Low;
-            g.SmoothingMode = SmoothingMode.HighSpeed;
-
-            foreach (var node in Nodes)
+            try
             {
-                g.FillRectangle(Brushes.Black, new RectangleF(new PointF(node.X+6, node.Y+6), node.GetNodeBounds()));
-            }
+                g.InterpolationMode = InterpolationMode.Low;
+                g.SmoothingMode = SmoothingMode.HighSpeed;
 
-            g.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.White)), g.ClipBounds);
-
-            var cpen = Pens.Black;
-            var epen = new Pen(Color.Gold, 3);
-            var epen2 = new Pen(Color.Black, 5);
-            foreach (var connection in Connections)//.Where(x=>x.IsExecution))
-            {
-                var osoc = connection.OutputNode.GetSockets().FirstOrDefault(x => x.Name == connection.OutputSocketName);
-                var beginSocket = osoc.GetBounds();
-                var isoc = connection.InputNode.GetSockets().FirstOrDefault(x => x.Name == connection.InputSocketName);
-                var endSocket = isoc.GetBounds();
-                var begin = beginSocket.Location + new SizeF(beginSocket.Width / 2f, beginSocket.Height / 2f);
-                var end = endSocket.Location += new SizeF(endSocket.Width / 2f, endSocket.Height / 2f);
-
-                if (connection.IsExecution)
+                foreach (var node in Nodes)
                 {
-                    DrawConnection(g, epen2, begin, end);
-                    DrawConnection(g, epen, begin, end);
+                    g.FillRectangle(Brushes.Black, new RectangleF(new PointF(node.X + 6, node.Y + 6), node.GetNodeBounds()));
                 }
-                else
+
+                g.FillRectangle(new SolidBrush(Color.FromArgb(200, Color.White)), g.ClipBounds);
+
+                var cpen = Pens.Black;
+                var epen = new Pen(Color.Gold, 3);
+                var epen2 = new Pen(Color.Black, 5);
+                foreach (var connection in Connections)//.Where(x=>x.IsExecution))
                 {
-                    DrawConnection(g, cpen, begin, end);
+                    var osoc = connection.OutputNode.GetSockets().FirstOrDefault(x => x.Name == connection.OutputSocketName);
+                    if (osoc != null)
+                    {
+                        var beginSocket = osoc.GetBounds();
+                        var isoc = connection.InputNode.GetSockets().FirstOrDefault(x => x.Name == connection.InputSocketName);
+                        var endSocket = isoc.GetBounds();
+                        var begin = beginSocket.Location + new SizeF(beginSocket.Width / 2f, beginSocket.Height / 2f);
+                        var end = endSocket.Location += new SizeF(endSocket.Width / 2f, endSocket.Height / 2f);
+
+                        if (connection.IsExecution)
+                        {
+                            DrawConnection(g, epen2, begin, end);
+                            DrawConnection(g, epen, begin, end);
+                        }
+                        else
+                        {
+                            DrawConnection(g, cpen, begin, end);
+                        }
+                    }
+                }
+
+                var orderedNodes = Nodes.OrderByDescending(x => x.Order);
+
+                foreach (var node in orderedNodes)
+                {
+                    node.Draw(g, mouseLocation, mouseButtons);
                 }
             }
-
-
-            var orderedNodes = Nodes.OrderByDescending(x => x.Order);
-            foreach (var node in orderedNodes)
+            catch (Exception ex)
             {
-                node.Draw(g, mouseLocation, mouseButtons);
+                Debug.WriteLine(ex.ToString());
             }
         }
 
@@ -79,7 +90,7 @@ namespace NodeEditor
             g.SmoothingMode = SmoothingMode.HighQuality;
 
             if (input == output) return;
-            const int interpolation = 48;
+            const int interpolation = 48;`
 
             PointF[] points = new PointF[interpolation];
             for (int i = 0; i < interpolation; i++)
@@ -113,16 +124,22 @@ namespace NodeEditor
 
         public static double Sat(double x)
         {
-            if (x < 0) return 0;
-            if (x > 1) return 1;
+            if (x < 0) 
+                return 0;
+            if (x > 1)
+                return 1;
             return x;
         }
 
 
         public static double Scale(double x, double a, double b, double c, double d)
         {
-            double s = (x - a)/(b - a);
-            return s*(d - c) + c;
+            if (b != a)
+            {
+                double s = (x - a) / (b - a);
+                return s * (d - c) + c;
+            }
+            return 1.0;
         }
 
         public static float Lerp(float a, float b, float amount)
