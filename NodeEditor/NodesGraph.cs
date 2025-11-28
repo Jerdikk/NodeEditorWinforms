@@ -90,7 +90,7 @@ namespace NodeEditor
             g.SmoothingMode = SmoothingMode.HighQuality;
 
             if (input == output) return;
-            const int interpolation = 48;`
+            const int interpolation = 48;
 
             PointF[] points = new PointF[interpolation];
             for (int i = 0; i < interpolation; i++)
